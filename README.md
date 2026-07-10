@@ -58,4 +58,7 @@ streamlit run src/app.py
 
 ## Documentacao Completa
 
+Para acessar a documentação completa do projeto Rota Zero, incluindo todas as 6 etapas estruturadas com detalhes, visite:
+[Documentação Completa - Google Docs](https://docs.google.com/document/d/1l40bYaDzjDyox5QPaxLVUFPcVpxFhv8GWmp5olFpdAI/edit?usp=sharing)
+
 A documentacao detalhada de cada etapa do desafio (persona, base de conhecimento, prompts, metricas e pitch) esta disponivel na pasta `docs/` e tambem em um Google Docs organizado por etapas, produzido durante o desenvolvimento deste projeto.
