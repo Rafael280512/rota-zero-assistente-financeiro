@@ -1,0 +1,65 @@
+[
+  {
+    "id": "essencialismo-financeiro",
+    "titulo": "Essencialismo financeiro: gastar menos no que nao importa para ter mais no que importa",
+    "tema": "essencialismo",
+    "resumo": "Nem todo corte de gasto e sacrificio. Essencialismo e escolher deliberadamente onde seu dinheiro cria valor de verdade.",
+    "corpo": "Essencialismo nao e sobre viver com pouco - e sobre viver de proposito. A pergunta certa nao e \"o que posso cortar?\", e sim \"o que realmente importa para mim?\". Quando voce nao decide isso de forma clara, todo gasto parece igualmente importante, e e assim que o orcamento vira uma bagunca de pequenas compras que, somadas, comem sua renda inteira.\n\nUm exercicio simples: liste seus gastos do ultimo mes e, para cada um, pergunte \"isso me aproximou de algo que eu realmente quero?\". Gastos que passam nesse teste (moradia estavel, saude, uma reserva de emergencia, uma viagem planejada) merecem prioridade. Os que nao passam sao candidatos naturais a corte - nao porque voce e \"fraco\", mas porque eles nao estavam alinhados com o que voce disse que queria.\n\nO essencialismo financeiro liberta espaco no orcamento sem a sensacao de estar se privando, porque a decisao veio de voce, nao de um corte generico de gastos.",
+    "tempoLeituraMinutos": 4,
+    "fasesRecomendadas": ["diagnostico", "reconstrucao"]
+  },
+  {
+    "id": "sociedade-do-cansaco",
+    "titulo": "A sociedade do cansaco: quando comprar vira forma de descansar",
+    "tema": "comportamento",
+    "resumo": "O filosofo Byung-Chul Han descreve uma sociedade que se cobra desempenho o tempo todo - e o consumo vira a valvula de escape mais acessivel.",
+    "corpo": "Vivemos numa cultura que valoriza produtividade extrema: trabalhar mais, aparecer mais, entregar mais. O filosofo Byung-Chul Han chama isso de \"sociedade do cansaco\" - nao somos mais cobrados de fora, nos cobramos de dentro, ate a exaustao.\n\nO problema e que esse cansaco pede alivio, e a compra de algo novo entrega uma dose rapida de prazer e controle: \"pelo menos isso eu posso decidir agora\". E um alivio real, mas curto - e por isso vem seguido de outro, e outro, formando um ciclo que corroe o orcamento sem nunca resolver o cansaco de verdade.\n\nReconhecer esse padrao e o primeiro passo: da proxima vez que sentir vontade de comprar algo por impulso, vale perguntar \"eu quero esse item, ou eu quero descansar?\". Se for a segunda opcao, o dinheiro nao vai resolver - e um sinal de que voce precisa de descanso de verdade, nao de uma nova notificacao de entrega.",
+    "tempoLeituraMinutos": 5,
+    "fasesRecomendadas": ["diagnostico", "reconstrucao"]
+  },
+  {
+    "id": "hiperconsumo",
+    "titulo": "Hiperconsumo: por que compramos o que nao precisamos",
+    "tema": "hiperconsumo",
+    "resumo": "Credito facil, parcelamento sem juros aparentes e comparacao social nas redes formam um combo perigoso para o orcamento.",
+    "corpo": "Tres forcas empurram o hiperconsumo hoje: credito facil (o cartao remove a dor imediata de pagar), parcelamento (\"12x sem juros\" faz o preco parecer menor do que e) e comparacao social (redes sociais mostram o consumo dos outros o tempo todo, raramente as dividas por tras dele).\n\nNenhuma dessas forcas e do seu controle individual - elas sao estruturais. Mas voce pode criar atrito de proposito contra elas: esperar 24 horas antes de qualquer compra parcelada, desativar o cartao salvo nos apps de compra, e lembrar que o parcelamento nao muda o preco total, so distribui a dor.\n\nUma pergunta pratica antes de qualquer compra nao planejada: \"eu compraria isso agora, a vista, com o dinheiro na mao?\". Se a resposta for nao, o parcelamento so esta escondendo uma decisao que voce mesmo nao tomaria de forma consciente.",
+    "tempoLeituraMinutos": 4,
+    "fasesRecomendadas": ["diagnostico", "reconstrucao"]
+  },
+  {
+    "id": "patrimonio-geracional",
+    "titulo": "Patrimonio geracional: pensar em dinheiro alem de voce",
+    "tema": "legado",
+    "resumo": "Depois que as dividas ficam para tras e a reserva esta pronta, a pergunta muda: que tipo de heranca financeira e de habitos voce quer deixar?",
+    "corpo": "Patrimonio geracional nao e so sobre valores em conta - e sobre transferir tambem os habitos que constroem esses valores. Familias que mantem patrimonio por geracoes normalmente tem algo em comum: conversam abertamente sobre dinheiro, ensinam as criancas a lidar com ele desde cedo, e tratam decisoes financeiras grandes (imoveis, negocios, heranca) como decisoes de familia, nao so do provedor principal.\n\nSe voce ja esta na fase de planejamento - sem dividas em aberto e com reserva de emergencia constituida - vale comecar a pensar em tres frentes: protecao (seguro de vida, planejamento sucessorio basico), educacao financeira dos seus dependentes, e investimentos com horizonte de decadas, nao meses.\n\nNao precisa ser um patrimonio grande para comecar a pensar dessa forma. O habito de tratar dinheiro como algo que se planeja a longo prazo e, em si, parte da heranca.",
+    "tempoLeituraMinutos": 5,
+    "fasesRecomendadas": ["planejamento"]
+  },
+  {
+    "id": "juros-compostos-efeito",
+    "titulo": "Juros compostos: a mesma matematica que constroi ou destroi seu patrimonio",
+    "tema": "matematica_do_dinheiro",
+    "resumo": "O mesmo mecanismo que faz um investimento crescer e o que faz uma divida de cartao virar bola de neve. A diferenca e de que lado voce esta.",
+    "corpo": "Juros compostos rendem juros sobre juros - por isso crescem de forma exponencial, nao linear. Investido a seu favor (aportes regulares, taxa razoavel, tempo), esse mecanismo e a ferramenta mais poderosa que uma pessoa comum tem para construir patrimonio. Contra voce (divida rotativa de cartao, por exemplo), o mesmo mecanismo pode transformar um valor pequeno em uma bola de neve em poucos meses.\n\nA Central de Comando do Rota Zero mostra essa comparacao de forma concreta: o quanto seu saldo positivo pode crescer investido, contra o quanto uma divida cara pode crescer se ficar parada. Vale revisitar esse grafico sempre que uma decisao financeira grande estiver em jogo.\n\nA licao pratica: toda divida com juros altos (cartao, cheque especial) merece prioridade de quitacao antes de qualquer investimento, porque dificilmente um investimento vai render mais do que esses juros custam.",
+    "tempoLeituraMinutos": 4,
+    "fasesRecomendadas": ["reconstrucao", "planejamento"]
+  },
+  {
+    "id": "divida-nao-e-fracasso",
+    "titulo": "Divida nao e fracasso pessoal - e um problema com solucao",
+    "tema": "comportamento",
+    "resumo": "Culpa e vergonha nao pagam nenhuma conta. Entender o que levou a divida e o primeiro passo real para sair dela.",
+    "corpo": "E comum sentir vergonha de estar endividado, como se isso fosse um atestado de incompetencia pessoal. Mas divida quase sempre e resultado de uma combinacao de fatores: renda que nao acompanhou custos, uma emergencia sem reserva para cobrir, falta de educacao financeira formal (que quase ninguem recebe na escola), ou um momento dificil da vida.\n\nEsse reconhecimento nao e desculpa para ignorar o problema - e o contrario. Culpa paralisa: e mais dificil olhar para os numeros quando cada extrato traz uma sensacao de fracasso. Aceitar a situacao sem julgamento e o que abre espaco para agir: organizar as dividas, entender juros e prazos, e comecar o plano de quitacao com clareza.\n\nSe a divida estiver causando sofrimento emocional intenso, vale buscar apoio de um psicologo junto com o planejamento financeiro. Dinheiro e emocao estao mais conectados do que parecem, e cuidar dos dois ao mesmo tempo costuma funcionar melhor do que tentar resolver so a planilha.",
+    "tempoLeituraMinutos": 4,
+    "fasesRecomendadas": ["diagnostico"]
+  },
+  {
+    "id": "bola-de-neve-avalanche-comportamento",
+    "titulo": "Bola de neve ou avalanche: o que importa mais, o numero ou o habito?",
+    "tema": "comportamento",
+    "resumo": "A avalanche economiza mais em juros. A bola de neve entrega vitorias mais rapido. A ciencia comportamental tem uma opiniao sobre qual funciona melhor na pratica.",
+    "corpo": "Matematicamente, quitar a divida de maior juros primeiro (avalanche) quase sempre custa menos no total. Mas pesquisas sobre comportamento financeiro mostram que muita gente desiste do plano antes de ver resultado - e a bola de neve, que quita a menor divida primeiro, entrega uma vitoria concreta mais rapido, o que ajuda a manter a motivacao.\n\nNao existe resposta unica certa: se voce tende a manter disciplina mesmo sem recompensas imediatas, a avalanche economiza mais dinheiro. Se voce sabe que precisa ver progresso rapido para nao desanimar, a bola de neve pode ser a diferenca entre terminar o plano ou abandona-lo no meio do caminho.\n\nNo modulo de Terapia de Dividas do Rota Zero, voce pode comparar os dois cenarios com seus proprios numeros e escolher o que faz mais sentido para o seu momento - o melhor metodo e sempre o que voce consegue manter ate o fim.",
+    "tempoLeituraMinutos": 3,
+    "fasesRecomendadas": ["reconstrucao"]
+  }
+]

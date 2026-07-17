@@ -63,6 +63,7 @@ interface FinanceState {
   produtos: Produto[];
   transacoes: Transacao[];
   dividas: Divida[];
+  conteudosLidos: string[];
 
   adicionarTransacao: (transacao: Omit<Transacao, "id">) => void;
   atualizarTransacao: (id: string, dados: Partial<Omit<Transacao, "id">>) => void;
@@ -70,6 +71,8 @@ interface FinanceState {
 
   registrarPagamentoDivida: (id: string, valorPago: number) => void;
   atualizarDivida: (id: string, dados: Partial<Omit<Divida, "id">>) => void;
+
+  marcarConteudoLido: (id: string, lido: boolean) => void;
 
   restaurarDadosDeExemplo: () => void;
 }
@@ -83,6 +86,7 @@ const estadoInicial = {
   produtos: produtosSeed as Produto[],
   transacoes: transacoesSeed as Transacao[],
   dividas: dividasSeed as Divida[],
+  conteudosLidos: [] as string[],
 };
 
 export const useFinanceStore = create<FinanceState>()(
@@ -115,6 +119,11 @@ export const useFinanceStore = create<FinanceState>()(
       atualizarDivida: (id, dados) =>
         set((estado) => ({
           dividas: estado.dividas.map((d) => (d.id === id ? { ...d, ...dados } : d)),
+        })),
+
+      marcarConteudoLido: (id, lido) =>
+        set((estado) => ({
+          conteudosLidos: lido ? Array.from(new Set([...estado.conteudosLidos, id])) : estado.conteudosLidos.filter((c) => c !== id),
         })),
 
       restaurarDadosDeExemplo: () => set({ ...estadoInicial }),
