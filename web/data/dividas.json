@@ -1,0 +1,32 @@
+[
+  {
+    "id": "d-1",
+    "credor": "Cartao de Credito Nubank",
+    "categoria": "cartao_credito",
+    "valorOriginal": 4200.0,
+    "saldoDevedor": 3150.0,
+    "taxaJurosMensal": 0.135,
+    "parcelasRestantes": 6,
+    "valorParcela": 700.0
+  },
+  {
+    "id": "d-2",
+    "credor": "Financiamento Veiculo - Banco Itau",
+    "categoria": "financiamento_veiculo",
+    "valorOriginal": 32000.0,
+    "saldoDevedor": 18400.0,
+    "taxaJurosMensal": 0.019,
+    "parcelasRestantes": 28,
+    "valorParcela": 890.0
+  },
+  {
+    "id": "d-3",
+    "credor": "Emprestimo Pessoal - Banco C6",
+    "categoria": "emprestimo_pessoal",
+    "valorOriginal": 6000.0,
+    "saldoDevedor": 2100.0,
+    "taxaJurosMensal": 0.048,
+    "parcelasRestantes": 4,
+    "valorParcela": 570.0
+  }
+]

@@ -1,0 +1,82 @@
+[
+  {
+    "id": "t-1",
+    "data": "2025-10-01",
+    "descricao": "Salário",
+    "categoria": "receita",
+    "valor": 5000,
+    "tipo": "entrada"
+  },
+  {
+    "id": "t-2",
+    "data": "2025-10-02",
+    "descricao": "Aluguel",
+    "categoria": "moradia",
+    "valor": 1200,
+    "tipo": "saida"
+  },
+  {
+    "id": "t-3",
+    "data": "2025-10-03",
+    "descricao": "Supermercado",
+    "categoria": "alimentacao",
+    "valor": 450,
+    "tipo": "saida"
+  },
+  {
+    "id": "t-4",
+    "data": "2025-10-05",
+    "descricao": "Netflix",
+    "categoria": "lazer",
+    "valor": 55.9,
+    "tipo": "saida"
+  },
+  {
+    "id": "t-5",
+    "data": "2025-10-07",
+    "descricao": "Farmácia",
+    "categoria": "saude",
+    "valor": 89,
+    "tipo": "saida"
+  },
+  {
+    "id": "t-6",
+    "data": "2025-10-10",
+    "descricao": "Restaurante",
+    "categoria": "alimentacao",
+    "valor": 120,
+    "tipo": "saida"
+  },
+  {
+    "id": "t-7",
+    "data": "2025-10-12",
+    "descricao": "Uber",
+    "categoria": "transporte",
+    "valor": 45,
+    "tipo": "saida"
+  },
+  {
+    "id": "t-8",
+    "data": "2025-10-15",
+    "descricao": "Conta de Luz",
+    "categoria": "moradia",
+    "valor": 180,
+    "tipo": "saida"
+  },
+  {
+    "id": "t-9",
+    "data": "2025-10-20",
+    "descricao": "Academia",
+    "categoria": "saude",
+    "valor": 99,
+    "tipo": "saida"
+  },
+  {
+    "id": "t-10",
+    "data": "2025-10-25",
+    "descricao": "Combustível",
+    "categoria": "transporte",
+    "valor": 250,
+    "tipo": "saida"
+  }
+]
