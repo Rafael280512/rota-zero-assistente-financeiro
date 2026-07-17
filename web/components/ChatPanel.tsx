@@ -1,6 +1,9 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { motion } from "framer-motion";
+
+import NeonButton from "@/components/ui/NeonButton";
 
 interface Mensagem {
   autor: "user" | "model";
@@ -70,31 +73,34 @@ export default function ChatPanel({
   }
 
   return (
-    <section className="flex h-[calc(100vh-8rem)] min-h-[32rem] flex-col rounded-2xl border border-zinc-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+    <section className="holo-panel flex h-[calc(100vh-8rem)] min-h-[32rem] flex-col rounded-sm">
       <div className="flex-1 overflow-y-auto px-4 py-5 sm:px-6">
         <div className="flex flex-col gap-4">
           {mensagens.map((mensagem, indice) => (
-            <div
+            <motion.div
               key={indice}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.25 }}
               className={`flex ${mensagem.autor === "user" ? "justify-end" : "justify-start"}`}
             >
               <div
-                className={`max-w-[85%] whitespace-pre-wrap rounded-2xl px-4 py-2.5 text-sm leading-relaxed sm:max-w-[75%] ${
+                className={`max-w-[85%] whitespace-pre-wrap rounded-sm px-4 py-2.5 text-sm leading-relaxed sm:max-w-[75%] ${
                   mensagem.autor === "user"
-                    ? "bg-emerald-600 text-white"
-                    : "bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-100"
+                    ? "bg-neon-cyan/15 text-ice border border-neon-cyan/30"
+                    : "bg-white/5 text-ice/85 border border-white/10"
                 }`}
               >
                 {mensagem.texto}
               </div>
-            </div>
+            </motion.div>
           ))}
           {carregando && (
             <div className="flex justify-start">
-              <div className="flex items-center gap-1 rounded-2xl bg-zinc-100 px-4 py-3 dark:bg-zinc-800">
-                <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-zinc-400 [animation-delay:-0.3s]" />
-                <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-zinc-400 [animation-delay:-0.15s]" />
-                <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-zinc-400" />
+              <div className="flex items-center gap-1 rounded-sm border border-white/10 bg-white/5 px-4 py-3">
+                <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-neon-cyan [animation-delay:-0.3s]" />
+                <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-neon-cyan [animation-delay:-0.15s]" />
+                <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-neon-cyan" />
               </div>
             </div>
           )}
@@ -103,13 +109,13 @@ export default function ChatPanel({
       </div>
 
       {erro && (
-        <p className="mx-4 mb-2 rounded-lg bg-red-50 px-3 py-2 text-xs text-red-700 dark:bg-red-950 dark:text-red-300">
+        <p className="mx-4 mb-2 rounded-sm border border-neon-red/30 bg-neon-red/10 px-3 py-2 text-xs text-neon-red">
           {erro}
         </p>
       )}
 
       {!apiKeyConfigurada && (
-        <p className="mx-4 mb-2 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-800 dark:bg-amber-950 dark:text-amber-200">
+        <p className="mx-4 mb-2 rounded-sm border border-neon-orange/30 bg-neon-orange/10 px-3 py-2 text-xs text-neon-orange">
           Configure a variavel <code>GOOGLE_API_KEY</code> em <code>web/.env.local</code> para conversar com o Rota
           Zero (veja o <code>.env.example</code>).
         </p>
@@ -122,7 +128,7 @@ export default function ChatPanel({
               key={sugestao}
               type="button"
               onClick={() => enviarPergunta(sugestao)}
-              className="rounded-full border border-zinc-200 px-3 py-1.5 text-xs text-zinc-600 transition hover:border-emerald-300 hover:text-emerald-700 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-emerald-700 dark:hover:text-emerald-400"
+              className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-ice/60 transition hover:border-neon-cyan/40 hover:text-neon-cyan"
             >
               {sugestao}
             </button>
@@ -135,22 +141,18 @@ export default function ChatPanel({
           evento.preventDefault();
           enviarPergunta(pergunta);
         }}
-        className="flex items-center gap-2 border-t border-zinc-200 p-3 dark:border-zinc-800 sm:p-4"
+        className="flex items-center gap-2 border-t border-white/10 p-3 sm:p-4"
       >
         <input
           value={pergunta}
           onChange={(evento) => setPergunta(evento.target.value)}
           placeholder="Escreva sua pergunta para o Rota Zero..."
-          className="flex-1 rounded-full border border-zinc-200 bg-zinc-50 px-4 py-2.5 text-sm text-zinc-900 outline-none placeholder:text-zinc-400 focus:border-emerald-400 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-50"
+          className="flex-1 rounded-sm border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-ice outline-none placeholder:text-ice/30 focus:border-neon-cyan/50"
           disabled={carregando}
         />
-        <button
-          type="submit"
-          disabled={carregando || !pergunta.trim()}
-          className="rounded-full bg-emerald-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-50"
-        >
+        <NeonButton type="submit" disabled={carregando || !pergunta.trim()}>
           Enviar
-        </button>
+        </NeonButton>
       </form>
     </section>
   );
