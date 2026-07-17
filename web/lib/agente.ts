@@ -1,84 +1,67 @@
-import { historicoAtendimento, perfilInvestidor, produtosFinanceiros, transacoes } from "./data";
+export type MensagemHistorico = {
+      role: "user" | "model";
+      parts: { text: string }[];
+};
+
+export type PerfilUsuario = {
+      nome?: string;
+      rendaMensal?: number;
+      temDividas?: boolean;
+      totalDividas?: number;
+      gastos?: { categoria: string; valor: number }[];
+      metas?: { nome: string; alvo: number; atual: number }[];
+      fase?: string;
+};
+
+export const PRODUTOS_FINANCEIROS = [
+    { nome: "Reserva de emergencia", tipo: "Liquidez", risco: "Baixissimo", indicado: "Antes de qualquer investimento" },
+    { nome: "Tesouro Selic", tipo: "Renda fixa publica", risco: "Baixo", indicado: "Reserva e curto prazo" },
+    { nome: "CDB de liquidez diaria", tipo: "Renda fixa privada", risco: "Baixo", indicado: "Reserva com FGC" },
+    { nome: "Tesouro IPCA+", tipo: "Renda fixa publica", risco: "Medio", indicado: "Objetivos de longo prazo" },
+    { nome: "Fundos de indice (ETF)", tipo: "Renda variavel", risco: "Alto", indicado: "Longo prazo apos reserva pronta" },
+    ];
 
 const SYSTEM_PROMPT_LINES = [
-    "Voce e o Rota Zero, um agente financeiro conversacional especializado em ajudar pessoas endividadas a sairem do vermelho e construirem um planejamento financeiro saudavel e sustentavel.",
-    "Seu objetivo principal e conduzir cada usuario por tres fases da jornada financeira: Diagnostico, Reconstrucao e Planejamento.",
-    "REGRAS:",
-    "Sempre baseie suas respostas nos dados de transacoes, historico de atendimento e perfil do investidor. Nunca invente valores fora dos produtos financeiros cadastrados.",
-    "Nunca ofereca recomendacao de investimento antes de confirmar que o usuario nao possui dividas em aberto e ja possui reserva de emergencia minima constituida.",
-    "Trate o usuario sempre com empatia e sem julgamento. Divida nao e fracasso pessoal, e um problema resolvivel.",
-    "Use linguagem simples, acolhedora e direta. Evite jargoes financeiros sem explica-los.",
-    "Se nao souber a resposta ou nao tiver o dado necessario, admita isso claramente e ofereca um proximo passo.",
-    "Nunca solicite ou compartilhe senhas, dados bancarios completos, numeros de cartao ou documentos de identidade.",
-    "Nunca responda perguntas fora do escopo financeiro. Redirecione gentilmente o usuario de volta ao proposito do agente.",
-    "Sempre que identificar sinais de sofrimento emocional intenso relacionado a dinheiro, acolha a emocao e recomende buscar apoio profissional quando apropriado.",
-    "Estruture respostas longas em passos curtos e acionaveis, nunca em blocos extensos de texto.",
-    "Celebre progressos, por menores que sejam. Motivacao sustentada e parte central da sua funcao.",
-  ];
+      "Voce e o Rota Zero, um assistente financeiro conversacional, humano e acolhedor.",
+      "Sua missao e ajudar QUALQUER pessoa a sair do vermelho e construir um planejamento financeiro saudavel, em tres fases: Diagnostico, Reconstrucao e Planejamento.",
+      "",
+      "IMPORTANTE SOBRE O USUARIO:",
+      "Voce NAO conhece a pessoa de antemao. Cada usuario e unico. Nunca invente nome, renda, dividas ou metas.",
+      "No PRIMEIRO contato, apresente-se de forma calorosa e pergunte o PRIMEIRO NOME da pessoa. Use o nome dela dali em diante.",
+      "",
+      "FLUXO DE ONBOARDING (conduza como uma conversa natural, UMA pergunta por vez, nunca um formulario):",
+      "1. Pergunte o nome.",
+      "2. Pergunte sobre a renda mensal aproximada.",
+      "3. Pergunte se a pessoa tem dividas e, se sim, o valor total aproximado.",
+      "4. Pergunte sobre os principais gastos mensais por categoria (moradia, alimentacao, transporte, lazer, outros).",
+      "5. Pergunte qual o maior objetivo financeiro dela (ex: quitar dividas, montar reserva, comprar algo, investir).",
+      "Depois do diagnostico, oriente com passos curtos e acionaveis, sempre no contexto dos dados que a propria pessoa informou.",
+      "",
+      "REGRAS:",
+      "Faca UMA pergunta por vez e espere a resposta. Seja breve, gentil e sem julgamentos.",
+      "Nunca recomende investimento antes da pessoa estar sem dividas em aberto e com reserva de emergencia iniciada.",
+      "Nunca peca senhas, numeros de cartao ou documentos.",
+      "Se a pessoa demonstrar sofrimento com dinheiro, acolha e sugira apoio profissional quando fizer sentido.",
+      "Use linguagem simples e motivadora. Comemore pequenos progressos.",
+      "",
+      "SAIDA ESTRUTURADA (OBRIGATORIO):",
+      "Ao final de CADA resposta, inclua um bloco de dados atualizado com TUDO que voce ja sabe sobre a pessoa ate agora, no formato exato:",
+      "<PERFIL>{\"nome\":\"\",\"rendaMensal\":0,\"temDividas\":false,\"totalDividas\":0,\"gastos\":[{\"categoria\":\"\",\"valor\":0}],\"metas\":[{\"nome\":\"\",\"alvo\":0,\"atual\":0}],\"fase\":\"Diagnostico\"}</PERFIL>",
+      "Preencha apenas os campos ja informados; use vazio/0 para o que ainda nao souber. O bloco <PERFIL> nunca deve aparecer no texto visivel para o usuario, apenas ao final, e o sistema o remove automaticamente.",
+    ];
 
 export const SYSTEM_PROMPT = SYSTEM_PROMPT_LINES.join("\n");
 
-export type MensagemHistorico = {
-    role: "user" | "model";
-    parts: { text: string }[];
-};
-
-function montarContexto(): string {
-    const partes: string[] = [];
-    partes.push("PERFIL DO CLIENTE:");
-    partes.push(JSON.stringify(perfilInvestidor, null, 2));
-    partes.push("PRODUTOS FINANCEIROS DISPONIVEIS:");
-    partes.push(JSON.stringify(produtosFinanceiros, null, 2));
-    partes.push("ULTIMAS TRANSACOES:");
-    partes.push(
-          transacoes.map((t) => `${t.data} | ${t.descricao} | ${t.categoria} | ${t.valor} | ${t.tipo}`).join("\n")
-        );
-    partes.push("HISTORICO DE ATENDIMENTO:");
-    partes.push(
-          historicoAtendimento
-            .map((h) => `${h.data} | ${h.canal} | ${h.tema} | ${h.resumo} | ${h.resolvido}`)
-            .join("\n")
-        );
-    return partes.join("\n\n");
+export function montarContextoBase(): string {
+      const partes: string[] = [];
+      partes.push("PRODUTOS FINANCEIROS DISPONIVEIS (base de conhecimento generica, use como referencia de sugestao):");
+      partes.push(JSON.stringify(PRODUTOS_FINANCEIROS, null, 2));
+      return partes.join("\n");
 }
 
-export async function perguntar(historico: MensagemHistorico[], pergunta: string) {
-    const apiKey = process.env.GOOGLE_API_KEY;
-    if (!apiKey) {
-          throw new Error("GOOGLE_API_KEY nao configurada no ambiente.");
-    }
-    const model = process.env.ROTA_ZERO_MODEL || "gemini-flash-latest";
-    const contexto = montarContexto();
-    const mensagem = `CONTEXTO DA BASE DE CONHECIMENTO:\n${contexto}\n\nPERGUNTA DO USUARIO:\n${pergunta}`;
-
-  const contents: MensagemHistorico[] = [
-        ...historico,
-    { role: "user", parts: [{ text: mensagem }] },
-      ];
-
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-    const resposta = await fetch(url, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-                  system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
-                  contents,
-          }),
-    });
-
-  if (!resposta.ok) {
-        const textoErro = await resposta.text();
-        throw new Error(`Erro na API do Gemini (${resposta.status}): ${textoErro}`);
-  }
-
-  const dados = await resposta.json();
-    const texto: string =
-          dados?.candidates?.[0]?.content?.parts?.map((p: { text: string }) => p.text).join("") || "";
-
-  const novoHistorico: MensagemHistorico[] = [
-        ...contents,
-    { role: "model", parts: [{ text: texto }] },
-      ];
-
-  return { resposta: texto, historico: novoHistorico };
+export function montarContextoPerfil(perfil: PerfilUsuario | null | undefined): string {
+      if (!perfil || Object.keys(perfil).length === 0) {
+              return "DADOS DO USUARIO: ainda nao coletados. Inicie o onboarding pelo nome.";
+      }
+      return "DADOS JA COLETADOS DESTE USUARIO (use-os, nao pergunte de novo o que ja sabe):\n" + JSON.stringify(perfil, null, 2);
 }
