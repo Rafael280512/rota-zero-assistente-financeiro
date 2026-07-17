@@ -59,6 +59,10 @@ npm run dev
 
 Acesse http://localhost:3000. Mais detalhes em [`web/README.md`](web/README.md).
 
+### Demo publica (GitHub Pages)
+
+A cada push, um workflow do GitHub Actions publica um build estatico do app web em `https://<usuario>.github.io/rota-zero-assistente-financeiro/`. Todos os modulos funcionam normalmente (dashboard, dividas, transacoes, investimentos, educacao); o chat com IA entra em modo demo (sem backend, responde com uma mensagem fixa) porque o GitHub Pages nao roda servidor. Veja [`web/README.md`](web/README.md#deploy) para detalhes.
+
 ### Prototipo Streamlit (alternativo)
 
 1. Instale as dependencias:

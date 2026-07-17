@@ -17,6 +17,10 @@ const SUGESTOES = [
   "Ja posso pensar em investir?",
 ];
 
+const DEMO_ESTATICO = process.env.NEXT_PUBLIC_STATIC_DEMO === "true";
+const RESPOSTA_DEMO_ESTATICO =
+  "Esta e uma demonstracao estatica hospedada no GitHub Pages, sem servidor por tras - por isso nao consigo processar sua pergunta de verdade aqui. Para conversar com o Rota Zero de verdade, rode o projeto localmente com sua propria GOOGLE_API_KEY (veja o README) ou acesse uma versao hospedada com backend, como a Vercel.";
+
 export default function ChatPanel({
   apiKeyConfigurada,
   nomeCliente,
@@ -45,6 +49,14 @@ export default function ChatPanel({
     setMensagens(proximasMensagens);
     setPergunta("");
     setCarregando(true);
+
+    if (DEMO_ESTATICO) {
+      await new Promise((resolve) => setTimeout(resolve, 600));
+      setMensagens((atual) => [...atual, { autor: "model", texto: RESPOSTA_DEMO_ESTATICO }]);
+      setCarregando(false);
+      requestAnimationFrame(() => fimDoChatRef.current?.scrollIntoView({ behavior: "smooth" }));
+      return;
+    }
 
     try {
       const resposta = await fetch("/api/chat", {
@@ -114,10 +126,16 @@ export default function ChatPanel({
         </p>
       )}
 
-      {!apiKeyConfigurada && (
+      {!apiKeyConfigurada && !DEMO_ESTATICO && (
         <p className="mx-4 mb-2 rounded-sm border border-neon-orange/30 bg-neon-orange/10 px-3 py-2 text-xs text-neon-orange">
           Configure a variavel <code>GOOGLE_API_KEY</code> em <code>web/.env.local</code> para conversar com o Rota
           Zero (veja o <code>.env.example</code>).
+        </p>
+      )}
+
+      {DEMO_ESTATICO && (
+        <p className="mx-4 mb-2 rounded-sm border border-neon-cyan/30 bg-neon-cyan/10 px-3 py-2 text-xs text-neon-cyan">
+          Demo estatica no GitHub Pages: o chat responde com uma mensagem fixa, sem IA de verdade por tras.
         </p>
       )}
 

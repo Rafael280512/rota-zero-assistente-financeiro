@@ -1,10 +1,13 @@
 # Rota Zero - Web App
 
-Interface web (Next.js + React + TypeScript + Tailwind) do Rota Zero, o assistente financeiro conversacional. Substitui/complementa o protótipo em Streamlit (`src/`) por um site com:
+Interface web (Next.js + React + TypeScript + Tailwind + Framer Motion + Recharts + Zustand) do Rota Zero, o assistente financeiro conversacional. Substitui/complementa o protótipo em Streamlit (`src/`) por um site com estética "3D overview" holográfica e 5 módulos:
 
-- Chat com o agente Rota Zero, com sugestões de perguntas iniciais.
-- Painel de diagnóstico financeiro (renda, patrimônio, saldo do mês, reserva de emergência, metas e gastos por categoria) calculado a partir dos dados mockados em `data/`.
-- Layout responsivo, com suporte a modo escuro.
+- **Assistente** (`/`): chat com o Rota Zero + diagnóstico financeiro rápido.
+- **Central de Comando** (`/dashboard`): patrimônio líquido, fluxo de caixa, distribuição de gastos, projeção de juros compostos a favor/contra e alertas de orçamento.
+- **Ponto Zero** (`/dividas`): comparador Bola de Neve vs Avalanche, registro de pagamentos, simulador de renegociação e painel de vitórias.
+- **Transações** (`/transacoes`): Data Grid editável (busca, filtros, ordenação, categorização em massa).
+- **Investimentos** (`/investimentos`): bloqueado até quitar dívidas e completar a reserva de emergência.
+- **Educação** (`/educacao`): conteúdos sobre essencialismo, hiperconsumo e patrimônio geracional.
 
 ## Como executar localmente
 
@@ -32,19 +35,36 @@ Interface web (Next.js + React + TypeScript + Tailwind) do Rota Zero, o assisten
 
 ```
 web/
-├── app/
-│   ├── page.tsx          # Pagina principal (dashboard + chat)
-│   ├── layout.tsx
-│   └── api/chat/route.ts # Endpoint que fala com o Gemini
+├── app/                    # Rotas (uma pasta por modulo) + api/chat/route.ts
 ├── components/
-│   ├── Dashboard.tsx     # Painel de diagnostico financeiro
-│   └── ChatPanel.tsx     # Interface de chat (client component)
-├── lib/
-│   ├── data.ts           # Carrega e resume os dados mockados
-│   └── agent.ts          # System prompt e chamada ao Gemini
-└── data/                 # Copia dos dados mockados (perfil, produtos, transacoes, historico)
+│   ├── ui/                 # HoloPanel, NeonButton, ProgressBeam, StatPod
+│   ├── layouts/             # AppShell, Sidebar, TopBar, PageTransition
+│   ├── charts/              # Graficos Recharts com tema holografico
+│   ├── dividas/, educacao/, transacoes/  # Componentes especificos de cada modulo
+│   ├── Dashboard.tsx e ChatPanel.tsx      # Modulo Assistente
+├── store/useFinanceStore.ts # Estado global (Zustand + persist em localStorage)
+├── hooks/                  # useJourneyPhase, useDashboardData
+├── utils/                  # financialMath.ts, debtStrategy.ts
+├── lib/                    # Carregamento de dados server-side (usado por app/page.tsx)
+└── data/                   # Dados mockados (perfil, produtos, transacoes, dividas, conteudos)
 ```
 
 ## Deploy
 
-Por ser uma aplicação Next.js padrão, pode ser publicada em qualquer provedor compatível (Vercel, Netlify, etc.). Configure a variável de ambiente `GOOGLE_API_KEY` (e opcionalmente `ROTA_ZERO_MODEL`) nas configurações do projeto no provedor escolhido.
+### Vercel (ou qualquer host Node/Next completo)
+
+Deploy padrão de app Next.js. Configure `GOOGLE_API_KEY` (e opcionalmente `ROTA_ZERO_MODEL`) nas variáveis de ambiente do provedor — o chat com o Gemini funciona normalmente via `/api/chat`.
+
+### GitHub Pages (demo estático, sem chat funcional)
+
+Existe um workflow (`.github/workflows/deploy-pages.yml`) que gera um export estático e publica em `https://<usuario>.github.io/rota-zero-assistente-financeiro/` a cada push nas branches configuradas. Como o GitHub Pages não roda servidor, a rota `/api/chat` é removida no build e o chat entra em "modo demo" (responde com uma mensagem fixa explicando a limitação) — todos os outros módulos (dashboard, dívidas, transações, investimentos, educação) funcionam normalmente, já que rodam inteiramente no cliente.
+
+Na primeira vez, pode ser necessário habilitar manualmente em **Settings → Pages → Build and deployment → Source → GitHub Actions** (depois disso o deploy é 100% automático a cada push).
+
+Para gerar esse build manualmente (o export estático não suporta a rota de API, por isso ela precisa ser removida antes do build - é isso que o workflow faz):
+
+```bash
+rm -rf app/api
+GITHUB_PAGES=true NEXT_PUBLIC_STATIC_DEMO=true npm run build
+# o resultado fica em web/out
+```
