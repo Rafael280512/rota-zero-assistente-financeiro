@@ -21,8 +21,9 @@ O que o Rota Zero NAO faz:
 
 ## Arquitetura
 
-- Interface: Streamlit (src/app.py)
-- LLM: Google Gemini, via biblioteca google-generativeai (camada gratuita do Google AI Studio)
+- Interface web (recomendada): Next.js + React + TypeScript + Tailwind (`web/`)
+- Interface alternativa/protótipo original: Streamlit (`src/app.py`)
+- LLM: Google Gemini, via `@google/generative-ai` (web) ou `google-generativeai` (Streamlit), camada gratuita do Google AI Studio
 - Dados: JSON/CSV mockados em data/ (perfil do investidor, transacoes, historico de atendimento e produtos financeiros)
 
 ## Estrutura do Projeto
@@ -31,6 +32,11 @@ O que o Rota Zero NAO faz:
 rota-zero-assistente-financeiro/
 ├── data/                    # Base de conhecimento (Etapa 2)
 ├── docs/                    # Documentacao completa (Etapas 1, 2, 3, 5 e 6)
+├── web/                     # App web (Next.js) - chat + dashboard financeiro
+│   ├── app/                 # Paginas e rota da API de chat
+│   ├── components/          # Dashboard e painel de chat
+│   ├── lib/                 # Logica do agente e carregamento dos dados
+│   └── data/                # Copia dos dados mockados usada pelo app web
 ├── src/
 │   ├── app.py               # Interface Streamlit (Etapa 4)
 │   ├── agente.py            # Logica do agente e system prompt (Etapa 3)
@@ -41,6 +47,19 @@ rota-zero-assistente-financeiro/
 ```
 
 ## Como Executar Localmente
+
+### App Web (Next.js) - recomendado
+
+```
+cd web
+npm install
+cp .env.example .env.local   # preencha GOOGLE_API_KEY (https://aistudio.google.com/app/apikey)
+npm run dev
+```
+
+Acesse http://localhost:3000. Mais detalhes em [`web/README.md`](web/README.md).
+
+### Prototipo Streamlit (alternativo)
 
 1. Instale as dependencias:
 
